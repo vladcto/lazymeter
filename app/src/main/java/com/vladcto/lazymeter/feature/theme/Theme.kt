@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.ui.theme
+package com.vladcto.lazymeter.feature.theme
 
 import android.app.Activity
 import android.os.Build

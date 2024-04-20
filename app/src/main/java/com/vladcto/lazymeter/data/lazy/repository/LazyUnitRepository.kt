@@ -5,8 +5,9 @@ import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LazyUnitRepository(private val lazyUnitDao: LazyUnitDao) {
+class LazyUnitRepository @Inject constructor(private val lazyUnitDao: LazyUnitDao) {
     suspend fun getAll(): List<LazyUnit> = withContext(Dispatchers.IO) {
         val result = async {
             lazyUnitDao.getAll()
@@ -14,9 +15,7 @@ class LazyUnitRepository(private val lazyUnitDao: LazyUnitDao) {
         return@withContext result.map { it.toDomain() }
     }
 
-    suspend fun add(unit: LazyUnit) = withContext(Dispatchers.IO) {
-        return@withContext addAll(listOf(unit))
-    }
+    suspend fun add(unit: LazyUnit) = addAll(listOf(unit))
 
     suspend fun addAll(units: List<LazyUnit>) = withContext(Dispatchers.IO) {
         return@withContext lazyUnitDao.insertAll(units.map { it.toDb() })

@@ -51,8 +51,11 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = false
+}
+
 dependencies {
-    annotationProcessor(libs.androidx.room.compiler)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
@@ -63,8 +66,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    //
     implementation(libs.androidx.room)
-    implementation(libs.android.hilt)
+    kapt(libs.androidx.room.compiler)
+    //
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     testImplementation(libs.junit)
 
