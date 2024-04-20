@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class LazyPreviewState(
+data class PreviewLazyState(
     val lazyUnits: List<LazyUnit>,
 )
 
-class LazyPreviewViewModel @Inject constructor(
+class PreviewLazyViewModel @Inject constructor(
     private val _lazyUnitRepository: LazyUnitRepository,
 ) : ViewModel() {
 
@@ -24,12 +24,12 @@ class LazyPreviewViewModel @Inject constructor(
             val result = async {
                 _lazyUnitRepository.getAll()
             }.await()
-            _previewState.update { _ -> LazyPreviewState(result) }
+            _previewState.update { _ -> PreviewLazyState(result) }
         }
     }
 
     private val _previewState = MutableStateFlow(
-        LazyPreviewState(listOf())
+        PreviewLazyState(listOf())
     )
     val previewState = _previewState.asStateFlow()
 
@@ -37,7 +37,7 @@ class LazyPreviewViewModel @Inject constructor(
         viewModelScope.launch {
             async { _lazyUnitRepository.add(unit) }.await()
             _previewState.update { currentState ->
-                LazyPreviewState(currentState.lazyUnits + unit)
+                PreviewLazyState(currentState.lazyUnits + unit)
             }
         }
     }
