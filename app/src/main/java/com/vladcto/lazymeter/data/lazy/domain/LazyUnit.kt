@@ -3,8 +3,8 @@ package com.vladcto.lazymeter.data.lazy.domain
 import java.util.Date
 
 enum class LazyReason {
-    tired,
-    distracted,
+    Tired,
+    Distracted,
 }
 
 data class LazyUnit(

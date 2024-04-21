@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 import java.util.Date
 
 enum class LazyReasonDb {
-    tired,
-    distracted,
+    Tired,
+    Distracted,
 }
 
 @Entity(tableName = "lazyUnit")

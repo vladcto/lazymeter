@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
 import com.vladcto.lazymeter.data.lazy.repository.LazyUnitRepository
+import com.vladcto.lazymeter.feature.another_api_send_using_retrofit.PipeDreamRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,6 +44,17 @@ class PreviewLazyViewModel @Inject constructor(
                 PreviewLazyState(currentState.lazyUnits + unit)
             }
         }
+    }
+
+    fun sendLazyUnit(unit: LazyUnit) {
+        viewModelScope.launch(context = Dispatchers.IO) {
+            PipeDreamRepository.sendLazyUnit(unit)
+        }
+    }
+
+    fun clear() = viewModelScope.launch {
+        _lazyUnitRepository.clear()
+        _previewState.update { _ -> PreviewLazyState(listOf()) }
     }
 
 }

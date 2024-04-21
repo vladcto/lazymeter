@@ -9,6 +9,9 @@ interface LazyUnitDao {
     @Query("SELECT * FROM lazyUnit")
     suspend fun getAll(): List<LazyUnitDb>
 
+    @Query("DELETE FROM lazyUnit")
+    suspend fun clear()
+
     @Insert
     suspend fun insertAll(units: List<LazyUnitDb>)
 }
