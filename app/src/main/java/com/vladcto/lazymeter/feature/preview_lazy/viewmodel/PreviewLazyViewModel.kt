@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
 import com.vladcto.lazymeter.data.lazy.repository.LazyUnitRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,6 +16,7 @@ data class PreviewLazyState(
     val lazyUnits: List<LazyUnit>,
 )
 
+@HiltViewModel
 class PreviewLazyViewModel @Inject constructor(
     private val _lazyUnitRepository: LazyUnitRepository,
 ) : ViewModel() {

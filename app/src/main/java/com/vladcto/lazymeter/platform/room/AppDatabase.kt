@@ -7,11 +7,11 @@ import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDao
 import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDb
 import com.vladcto.lazymeter.platform.room.converter.RoomDateLongConverter
 
-@TypeConverters(RoomDateLongConverter::class)
 @Database(
     entities = [LazyUnitDb::class],
     version = 1
 )
+@TypeConverters(RoomDateLongConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun lazyUnitDao(): LazyUnitDao
 }

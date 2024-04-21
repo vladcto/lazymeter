@@ -1,10 +1,12 @@
 package com.vladcto.lazymeter.feature.preview_lazy.ui
 
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -21,13 +23,21 @@ fun LazyPreviewPage(
     previewLazyViewModel: PreviewLazyViewModel = viewModel()
 ) {
     val lazyUnitData by previewLazyViewModel.previewState.collectAsState()
-    Scaffold(topBar = {
-        TopAppBar(title = { Text("PreviewPage") })
-    }) {
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text("PreviewPage") })
+        },
+        floatingActionButton = {
+//            FloatingActionButton(onClick = { previewLazyViewModel.addLazyUnit() }) {
+//
+//            }
+        }
+    ) {
         LazyColumn(
             modifier = Modifier
                 .padding(it)
-                .verticalScroll(rememberScrollState())
+                .fillMaxHeight()
+//                .verticalScroll(rememberScrollState())
         ) {
             items(lazyUnitData.lazyUnits) { _ ->
                 LazyUnitCard()

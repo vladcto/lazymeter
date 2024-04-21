@@ -1,19 +1,27 @@
 package com.vladcto.lazymeter.platform.di
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Room
+import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDao
 import com.vladcto.lazymeter.platform.room.AppDatabase
+import com.vladcto.lazymeter.platform.room.converter.RoomDateLongConverter
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Module
-class AppModule : Application() {
+@InstallIn(ViewModelComponent::class)
+class AppModule {
     @Provides
-    fun provideAppDatabase(): AppDatabase {
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(
-            context = applicationContext,
-            AppDatabase::class.java,
-            "lazymeter-db"
+            context = appContext,
+            AppDatabase::class.java, "lazymeter-db",
         ).build()
     }
+
+    @Provides
+    fun provideUserDao(appDatabase: AppDatabase): LazyUnitDao = appDatabase.lazyUnitDao()
 }
