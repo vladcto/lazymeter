@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.feature.preview_lazy.ui.components
+package com.vladcto.lazymeter.app.lazy_overview.preview.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

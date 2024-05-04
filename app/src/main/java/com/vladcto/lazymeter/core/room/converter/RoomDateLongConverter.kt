@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.platform.room.converter
+package com.vladcto.lazymeter.core.room.converter
 
 import androidx.room.TypeConverter
 import java.util.Date

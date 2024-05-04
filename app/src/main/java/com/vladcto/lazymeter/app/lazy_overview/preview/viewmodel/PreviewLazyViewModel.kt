@@ -1,13 +1,10 @@
-package com.vladcto.lazymeter.feature.preview_lazy.viewmodel
+package com.vladcto.lazymeter.app.lazy_overview.preview.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
 import com.vladcto.lazymeter.data.lazy.repository.LazyUnitRepository
-import com.vladcto.lazymeter.feature.another_api_send_using_retrofit.PipeDreamRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -25,30 +22,20 @@ class PreviewLazyViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val result = async {
-                _lazyUnitRepository.getAll()
-            }.await()
+            val result = _lazyUnitRepository.getAll()
             _previewState.update { _ -> PreviewLazyState(result) }
         }
     }
 
-    private val _previewState = MutableStateFlow(
-        PreviewLazyState(listOf())
-    )
+    private val _previewState = MutableStateFlow(PreviewLazyState(listOf()))
     val previewState = _previewState.asStateFlow()
 
     fun addLazyUnit(unit: LazyUnit) {
         viewModelScope.launch {
-            async { _lazyUnitRepository.add(unit) }.await()
+            _lazyUnitRepository.add(unit)
             _previewState.update { currentState ->
                 PreviewLazyState(currentState.lazyUnits + unit)
             }
-        }
-    }
-
-    fun sendLazyUnit(unit: LazyUnit) {
-        viewModelScope.launch(context = Dispatchers.IO) {
-            PipeDreamRepository.sendLazyUnit(unit)
         }
     }
 

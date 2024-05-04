@@ -1,6 +1,5 @@
-package com.vladcto.lazymeter.feature.theme
+package com.vladcto.lazymeter.app.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

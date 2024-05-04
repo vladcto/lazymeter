@@ -1,10 +1,9 @@
-package com.vladcto.lazymeter.platform.di
+package com.vladcto.lazymeter.core.di
 
 import android.content.Context
 import androidx.room.Room
 import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDao
-import com.vladcto.lazymeter.platform.room.AppDatabase
-import com.vladcto.lazymeter.platform.room.converter.RoomDateLongConverter
+import com.vladcto.lazymeter.core.room.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

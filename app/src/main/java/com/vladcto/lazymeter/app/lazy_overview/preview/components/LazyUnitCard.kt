@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.feature.preview_lazy.ui.components
+package com.vladcto.lazymeter.app.lazy_overview.preview.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

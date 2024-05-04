@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.feature.theme
+package com.vladcto.lazymeter.app.theme
 
 import androidx.compose.ui.graphics.Color
 
