@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.lazy_overview.preview.components
+package com.vladcto.lazymeter.app.lazyoverview.preview.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,22 +14,26 @@ import java.text.SimpleDateFormat
 private const val DATE_PATTERN = "HH:mm dd-MM-yy"
 
 @Composable
-fun LazyUnitCard(lazyUnit: LazyUnit, modifier: Modifier) {
+fun LazyUnitCard(
+    lazyUnit: LazyUnit,
+    modifier: Modifier,
+) {
     val locale = LocalConfiguration.current.locales[0]
     val dateFormat = SimpleDateFormat(DATE_PATTERN, locale)
     Row(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     ) {
         Text(
-            text = when (lazyUnit.reason) {
-                LazyReason.Tired -> "Устал"
-                LazyReason.Distracted -> "Отвлекся"
-            }
+            text =
+                when (lazyUnit.reason) {
+                    LazyReason.Tired -> "Устал"
+                    LazyReason.Distracted -> "Отвлекся"
+                },
         )
         Text(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.End,
-            text = dateFormat.format(lazyUnit.time)
+            text = dateFormat.format(lazyUnit.time),
         )
     }
 }

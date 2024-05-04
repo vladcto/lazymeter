@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.lazy_overview.preview.components
+package com.vladcto.lazymeter.app.lazyoverview.preview.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,14 +22,17 @@ import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
 import java.util.Date
 
 @Composable
-fun CreateLazyUnitDialog(onDismissRequest: () -> Unit, onComplete: (LazyUnit) -> Unit) {
+fun CreateLazyUnitDialog(
+    onDismissRequest: () -> Unit,
+    onComplete: (LazyUnit) -> Unit,
+) {
     val choiceTired = remember { mutableStateOf(true) }
     AlertDialog(
         onDismissRequest = onDismissRequest,
         icon = {
             Icon(
                 Icons.Rounded.Edit,
-                contentDescription = ""
+                contentDescription = "",
             )
         },
         title = {
@@ -38,20 +41,21 @@ fun CreateLazyUnitDialog(onDismissRequest: () -> Unit, onComplete: (LazyUnit) ->
         text = {
             Column(modifier = Modifier.selectableGroup()) {
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     RadioButton(
                         selected = choiceTired.value,
-                        onClick = { choiceTired.value = true })
+                        onClick = { choiceTired.value = true },
+                    )
                     Text(text = "Устал", modifier = Modifier.padding(start = 16.dp))
-
                 }
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     RadioButton(
                         selected = !choiceTired.value,
-                        onClick = { choiceTired.value = false })
+                        onClick = { choiceTired.value = false },
+                    )
                     Text(text = "Отвлекся", modifier = Modifier.padding(start = 16.dp))
                 }
             }
@@ -62,12 +66,13 @@ fun CreateLazyUnitDialog(onDismissRequest: () -> Unit, onComplete: (LazyUnit) ->
                     onComplete(
                         LazyUnit(
                             time = Date(),
-                            reason = LazyReason.Tired.takeIf { choiceTired.value }
-                                ?: LazyReason.Distracted
-                        )
+                            reason =
+                                LazyReason.Tired.takeIf { choiceTired.value }
+                                    ?: LazyReason.Distracted,
+                        ),
                     )
                     onDismissRequest()
-                }
+                },
             ) {
                 Text(text = "Подтвердить")
             }

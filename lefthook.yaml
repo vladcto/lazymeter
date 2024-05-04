@@ -1,1 +1,9 @@
 pre-commit:
+  commands:
+    ktlint-format:
+      run: ktlint -F
+
+pre-push:
+  commands:
+    ktlint-check:
+      run: ktlint --reporter=plain

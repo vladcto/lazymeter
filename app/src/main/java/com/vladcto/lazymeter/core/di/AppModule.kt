@@ -2,8 +2,8 @@ package com.vladcto.lazymeter.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDao
 import com.vladcto.lazymeter.core.room.AppDatabase
+import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,10 +14,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 @InstallIn(ViewModelComponent::class)
 class AppModule {
     @Provides
-    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+    fun provideAppDatabase(
+        @ApplicationContext appContext: Context,
+    ): AppDatabase {
         return Room.databaseBuilder(
             context = appContext,
-            AppDatabase::class.java, "lazymeter-db",
+            AppDatabase::class.java,
+            "lazymeter-db",
         ).build()
     }
 

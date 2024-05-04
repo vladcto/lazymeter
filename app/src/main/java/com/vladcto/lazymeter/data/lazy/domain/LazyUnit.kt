@@ -1,4 +1,4 @@
-  package com.vladcto.lazymeter.data.lazy.domain
+package com.vladcto.lazymeter.data.lazy.domain
 
 import java.util.Date
 

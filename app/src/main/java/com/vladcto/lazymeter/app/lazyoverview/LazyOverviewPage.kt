@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.lazy_overview
+package com.vladcto.lazymeter.app.lazyoverview
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -22,14 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.vladcto.lazymeter.app.lazy_overview.preview.components.CreateLazyUnitDialog
-import com.vladcto.lazymeter.app.lazy_overview.preview.components.LazyUnitCard
-import com.vladcto.lazymeter.app.lazy_overview.preview.viewmodel.PreviewLazyViewModel
+import com.vladcto.lazymeter.app.lazyoverview.preview.components.CreateLazyUnitDialog
+import com.vladcto.lazymeter.app.lazyoverview.preview.components.LazyUnitCard
+import com.vladcto.lazymeter.app.lazyoverview.preview.viewmodel.PreviewLazyViewModel
 
 @Composable
-fun LazyPreviewPage(
-    previewLazyViewModel: PreviewLazyViewModel = viewModel()
-) {
+fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
     val lazyUnitData by previewLazyViewModel.previewState.collectAsState()
     val creationDialog = remember { mutableStateOf(false) }
     Scaffold(
@@ -38,30 +36,31 @@ fun LazyPreviewPage(
                 title = {
                     Text(
                         "Причины, почему не геометрические фигуры",
-                        fontSize = 20.sp
+                        fontSize = 20.sp,
                     )
                 },
                 actions = {
                     IconButton(
-                        onClick = { previewLazyViewModel.clear() }) {
+                        onClick = { previewLazyViewModel.clear() },
+                    ) {
                         Icon(
                             Icons.Rounded.Delete,
-                            contentDescription = ""
+                            contentDescription = "",
                         )
                     }
-                }
+                },
             )
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { creationDialog.value = true }
+                onClick = { creationDialog.value = true },
             ) {
                 Icon(
                     Icons.Rounded.Add,
                     contentDescription = "",
                 )
             }
-        }
+        },
     ) {
         if (creationDialog.value) {
             CreateLazyUnitDialog(
@@ -70,15 +69,16 @@ fun LazyPreviewPage(
             )
         }
         LazyColumn(
-            modifier = Modifier
-                .padding(it)
-                .fillMaxHeight()
-                .padding(horizontal = 16.dp)
+            modifier =
+                Modifier
+                    .padding(it)
+                    .fillMaxHeight()
+                    .padding(horizontal = 16.dp),
         ) {
             items(lazyUnitData.lazyUnits) { unit ->
                 LazyUnitCard(
                     unit,
-                    modifier = Modifier.padding(horizontal = 4.dp)
+                    modifier = Modifier.padding(horizontal = 4.dp),
                 )
             }
         }
