@@ -5,6 +5,8 @@ import java.util.Date
 enum class LazyReason {
     Tired,
     Distracted,
+    Boring,
+    Hard,
 }
 
 data class LazyUnit(

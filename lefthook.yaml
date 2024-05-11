@@ -1,7 +1,12 @@
+format:
+  commands:
+    ktlint:
+      run: ktlint -F
+
 pre-commit:
   commands:
     ktlint-format:
-      run: ktlint -F
+      run: lefthook run format
 
 pre-push:
   commands:

@@ -7,33 +7,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
-import com.vladcto.lazymeter.data.lazy.domain.LazyReason
+import com.vladcto.lazymeter.app.drivers.formattedDate
+import com.vladcto.lazymeter.app.drivers.translatedName
 import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
-import java.text.SimpleDateFormat
-
-private const val DATE_PATTERN = "HH:mm dd-MM-yy"
 
 @Composable
 fun LazyUnitCard(
     lazyUnit: LazyUnit,
     modifier: Modifier,
 ) {
-    val locale = LocalConfiguration.current.locales[0]
-    val dateFormat = SimpleDateFormat(DATE_PATTERN, locale)
     Row(
         modifier = modifier.fillMaxWidth(),
     ) {
         Text(
-            text =
-                when (lazyUnit.reason) {
-                    LazyReason.Tired -> "Устал"
-                    LazyReason.Distracted -> "Отвлекся"
-                },
+            text = lazyUnit.reason.translatedName(),
         )
         Text(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.End,
-            text = dateFormat.format(lazyUnit.time),
+            text = lazyUnit.formattedDate(LocalConfiguration.current.locales[0]),
         )
     }
 }
