@@ -13,5 +13,5 @@ interface LazyUnitDao {
     suspend fun clear()
 
     @Insert
-    suspend fun insertAll(units: List<LazyUnitDb>)
+    suspend fun insert(unit: LazyUnitDb)
 }

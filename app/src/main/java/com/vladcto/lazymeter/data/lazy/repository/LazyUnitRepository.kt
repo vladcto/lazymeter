@@ -27,11 +27,9 @@ class LazyUnitRepository
                 return@withContext _lazyUnitDao.clear()
             }
 
-        suspend fun add(unit: LazyUnit) = addAll(listOf(unit))
-
-        suspend fun addAll(units: List<LazyUnit>) =
+        suspend fun add(unit: LazyUnit) =
             withContext(Dispatchers.IO) {
-                return@withContext _lazyUnitDao.insertAll(units.map { it.toDb() })
+                _lazyUnitDao.insert(unit.toDb())
             }
     }
 
