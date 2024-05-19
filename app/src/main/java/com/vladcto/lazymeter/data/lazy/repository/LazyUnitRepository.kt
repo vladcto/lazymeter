@@ -38,11 +38,23 @@ class LazyUnitRepository
 private fun LazyUnit.toDb(): LazyUnitDb =
     LazyUnitDb(
         time = this.time,
-        reason = LazyReasonDb.valueOf(this.reason.name),
+        reason =
+            when (this.reason) {
+                LazyReason.Tired -> LazyReasonDb.Tired
+                LazyReason.Boring -> LazyReasonDb.Boring
+                LazyReason.Distracted -> LazyReasonDb.Distracted
+                LazyReason.Hard -> LazyReasonDb.Hard
+            },
     )
 
 private fun LazyUnitDb.toDomain(): LazyUnit =
     LazyUnit(
         time = this.time,
-        reason = LazyReason.valueOf(this.reason.name),
+        reason =
+            when (this.reason) {
+                LazyReasonDb.Tired -> LazyReason.Tired
+                LazyReasonDb.Boring -> LazyReason.Boring
+                LazyReasonDb.Distracted -> LazyReason.Distracted
+                LazyReasonDb.Hard -> LazyReason.Hard
+            },
     )

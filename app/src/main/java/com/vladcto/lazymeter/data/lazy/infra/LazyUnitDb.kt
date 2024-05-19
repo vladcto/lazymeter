@@ -7,6 +7,8 @@ import java.time.LocalDateTime
 enum class LazyReasonDb {
     Tired,
     Distracted,
+    Hard,
+    Boring,
 }
 
 @Entity(tableName = "lazyUnit")

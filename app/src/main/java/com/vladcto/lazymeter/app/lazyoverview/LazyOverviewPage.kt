@@ -4,7 +4,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.rounded.Build
+import androidx.compose.material.icons.rounded.Face
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -17,35 +21,47 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.vladcto.lazymeter.app.lazyoverview.preview.ui.LazyPreviewSection
 import com.vladcto.lazymeter.app.lazyoverview.preview.viewmodel.PreviewLazyViewModel
 import com.vladcto.lazymeter.app.lazyoverview.stats.LazyStatsSection
-import com.vladcto.lazymeter.app.uikit.LzSection
+import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable
 fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
-    val lazyUnitData by previewLazyViewModel.previewState.collectAsState()
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        "Причины, почему не геометрические фигуры",
-                        fontSize = 20.sp,
-                    )
-                },
-                actions = {
-                    IconButton(
-                        onClick = { previewLazyViewModel.clear() },
-                    ) {
-                        Icon(
-                            Icons.Rounded.Delete,
-                            contentDescription = "",
-                        )
-                    }
-                },
-            )
-        },
-    ) {
+    val lazyPreviewState by previewLazyViewModel.previewState.collectAsState()
+    Scaffold(topBar = {
+        TopAppBar(
+            title = {
+                Text(
+                    "Причины, почему не геометрические фигуры",
+                    fontSize = 20.sp,
+                )
+            },
+        )
+    }, bottomBar = {
+        BottomAppBar {
+            IconButton(onClick = {
+                previewLazyViewModel.addLazyUnit(LazyReason.Distracted)
+            }) {
+                Icon(Icons.Rounded.Add, contentDescription = "")
+            }
+            IconButton(onClick = {
+                previewLazyViewModel.addLazyUnit(LazyReason.Hard)
+            }) {
+                Icon(Icons.Rounded.AddCircle, contentDescription = "")
+            }
+            IconButton(onClick = {
+                previewLazyViewModel.addLazyUnit(LazyReason.Tired)
+            }) {
+                Icon(Icons.Rounded.Build, contentDescription = "")
+            }
+            IconButton(onClick = {
+                previewLazyViewModel.addLazyUnit(LazyReason.Boring)
+            }) {
+                Icon(Icons.Rounded.Face, contentDescription = "")
+            }
+        }
+    }) {
         Column(
             modifier =
                 Modifier
@@ -54,7 +70,7 @@ fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
                     .fillMaxHeight(),
         ) {
             LazyStatsSection()
-            LzSection(title = "События")
+            LazyPreviewSection(lazyUnits = lazyPreviewState.lazyUnits)
         }
     }
 }

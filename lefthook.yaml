@@ -7,8 +7,7 @@ pre-commit:
   commands:
     ktlint-format:
       run: lefthook run format
-    git-add:
-      run: git add -u
+      stage_fixed: true
 
 pre-push:
   commands:

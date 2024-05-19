@@ -2,6 +2,7 @@ package com.vladcto.lazymeter.app.lazyoverview.preview.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
 import com.vladcto.lazymeter.data.lazy.repository.LazyUnitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 data class PreviewLazyState(
@@ -31,7 +33,8 @@ class PreviewLazyViewModel
         private val _previewState = MutableStateFlow(PreviewLazyState(listOf()))
         val previewState = _previewState.asStateFlow()
 
-        fun addLazyUnit(unit: LazyUnit) {
+        fun addLazyUnit(reason: LazyReason) {
+            val unit = LazyUnit(LocalDateTime.now(), reason)
             viewModelScope.launch {
                 _lazyUnitRepository.add(unit)
                 _previewState.update { currentState ->
