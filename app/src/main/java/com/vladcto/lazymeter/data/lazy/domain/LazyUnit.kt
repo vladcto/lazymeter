@@ -1,6 +1,6 @@
 package com.vladcto.lazymeter.data.lazy.domain
 
-import java.util.Date
+import java.time.LocalDateTime
 
 enum class LazyReason {
     Tired,
@@ -10,6 +10,6 @@ enum class LazyReason {
 }
 
 data class LazyUnit(
-    val time: Date,
+    val time: LocalDateTime,
     val reason: LazyReason,
 )

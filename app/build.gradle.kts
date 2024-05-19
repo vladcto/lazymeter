@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.vladcto.lazymeter"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -41,6 +41,7 @@ android {
         freeCompilerArgs +=
             listOf(
                 "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+                "-opt-in=androidx.compose.foundation.layout.ExperimentalLayoutApi",
             )
     }
     buildFeatures {

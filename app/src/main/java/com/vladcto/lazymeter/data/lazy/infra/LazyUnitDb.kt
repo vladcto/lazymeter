@@ -2,7 +2,7 @@ package com.vladcto.lazymeter.data.lazy.infra
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
+import java.time.LocalDateTime
 
 enum class LazyReasonDb {
     Tired,
@@ -13,5 +13,5 @@ enum class LazyReasonDb {
 data class LazyUnitDb(
     @PrimaryKey(autoGenerate = true) val uid: Int = 0,
     val reason: LazyReasonDb,
-    val time: Date,
+    val time: LocalDateTime,
 )

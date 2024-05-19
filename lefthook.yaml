@@ -7,6 +7,8 @@ pre-commit:
   commands:
     ktlint-format:
       run: lefthook run format
+    git-add:
+      run: git add -u
 
 pre-push:
   commands:

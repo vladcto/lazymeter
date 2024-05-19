@@ -1,5 +1,6 @@
 package com.vladcto.lazymeter.app.lazyoverview.preview.ui
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -7,10 +8,23 @@ import com.vladcto.lazymeter.app.uikit.LzSection
 
 @Composable
 fun PreviewLazySection(modifier: Modifier = Modifier) {
+    val choosen = false
+
     LzSection(
         title = "Просмотр",
         actions = {},
     ) {
+        if (choosen) {
+            MonthLazyGroups(
+                modifier = modifier.fillMaxSize(),
+                units = listOf(),
+            )
+        } else {
+            DayLazyGroup(
+                modifier = modifier.fillMaxSize(),
+                units = listOf(),
+            )
+        }
     }
 }
 

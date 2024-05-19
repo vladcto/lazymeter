@@ -1,12 +1,20 @@
 package com.vladcto.lazymeter.core.room.converter
 
 import androidx.room.TypeConverter
-import java.util.Date
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 class RoomDateLongConverter {
     @TypeConverter
-    fun dateToLong(date: Date?): Long? = date?.time
+    fun dateToLong(date: LocalDateTime?): Long? = date?.toEpochSecond(ZoneOffset.UTC)
 
     @TypeConverter
-    fun longToDate(value: Long?): Date? = value?.let { Date(it) }
+    fun longToDate(value: Long?): LocalDateTime? =
+        value?.let {
+            LocalDateTime.ofEpochSecond(
+                it,
+                0,
+                ZoneOffset.UTC,
+            )
+        }
 }
