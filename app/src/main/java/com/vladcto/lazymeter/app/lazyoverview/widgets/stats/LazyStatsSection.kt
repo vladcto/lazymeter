@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.lazyoverview.stats
+package com.vladcto.lazymeter.app.lazyoverview.widgets.stats
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

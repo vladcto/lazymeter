@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.lazyoverview.preview.ui
+package com.vladcto.lazymeter.app.lazyoverview.widgets.preview
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -35,6 +35,8 @@ fun DayLazyGroup(
         }
     }
 }
+
+// Preview
 
 @Preview(widthDp = 150)
 @Composable

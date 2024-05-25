@@ -21,9 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.vladcto.lazymeter.app.lazyoverview.preview.ui.LazyPreviewSection
-import com.vladcto.lazymeter.app.lazyoverview.preview.viewmodel.PreviewLazyViewModel
-import com.vladcto.lazymeter.app.lazyoverview.stats.LazyStatsSection
+import com.vladcto.lazymeter.app.lazyoverview.viewmodel.PreviewLazyViewModel
+import com.vladcto.lazymeter.app.lazyoverview.widgets.preview.LazyPreviewSection
+import com.vladcto.lazymeter.app.lazyoverview.widgets.stats.LazyStatsSection
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable

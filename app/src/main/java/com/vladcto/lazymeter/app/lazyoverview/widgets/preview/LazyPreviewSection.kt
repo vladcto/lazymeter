@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.lazyoverview.preview.ui
+package com.vladcto.lazymeter.app.lazyoverview.widgets.preview
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable

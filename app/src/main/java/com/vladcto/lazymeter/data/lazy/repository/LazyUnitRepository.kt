@@ -8,6 +8,8 @@ import com.vladcto.lazymeter.data.lazy.infra.LazyUnitDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import java.time.Duration
+import java.time.LocalDate
 import javax.inject.Inject
 
 class LazyUnitRepository
@@ -19,18 +21,42 @@ class LazyUnitRepository
                     async {
                         _lazyUnitDao.getAll()
                     }.await()
-                return@withContext result.map { it.toDomain() }
-            }
-
-        suspend fun clear() =
-            withContext(Dispatchers.IO) {
-                return@withContext _lazyUnitDao.clear()
+                return@withContext result.map { it.toDb() }
             }
 
         suspend fun add(unit: LazyUnit) =
             withContext(Dispatchers.IO) {
                 _lazyUnitDao.insert(unit.toDb())
             }
+
+        suspend fun getCountInDay(date: LocalDate): Int {
+            val startTime = date.atStartOfDay()
+            val endTime = startTime.plusHours(24)
+            return _lazyUnitDao.getReasonCountInRange(
+                startTime = startTime,
+                endTime = endTime,
+            )
+        }
+
+        suspend fun getCountInDay(
+            reason: LazyReason,
+            date: LocalDate,
+        ): Int {
+            val startTime = date.atStartOfDay()
+            val endTime = startTime.plusHours(24)
+            return _lazyUnitDao.getReasonCountInRange(
+                reason = reason.toDb(),
+                startTime = startTime,
+                endTime = endTime,
+            )
+        }
+
+        suspend fun avgDayCount(date: LocalDate): Float {
+            val startTime = date.atStartOfDay()
+            val endTime = startTime.plusHours(24)
+            val count = _lazyUnitDao.getReasonCountInRange(startTime, endTime)
+            return count / (Duration.between(startTime, endTime).toDays().toFloat())
+        }
     }
 
 // Mappers
@@ -38,16 +64,18 @@ class LazyUnitRepository
 private fun LazyUnit.toDb(): LazyUnitDb =
     LazyUnitDb(
         time = this.time,
-        reason =
-            when (this.reason) {
-                LazyReason.Tired -> LazyReasonDb.Tired
-                LazyReason.Boring -> LazyReasonDb.Boring
-                LazyReason.Distracted -> LazyReasonDb.Distracted
-                LazyReason.Hard -> LazyReasonDb.Hard
-            },
+        reason = reason.toDb(),
     )
 
-private fun LazyUnitDb.toDomain(): LazyUnit =
+private fun LazyReason.toDb(): LazyReasonDb =
+    when (this) {
+        LazyReason.Tired -> LazyReasonDb.Tired
+        LazyReason.Boring -> LazyReasonDb.Boring
+        LazyReason.Distracted -> LazyReasonDb.Distracted
+        LazyReason.Hard -> LazyReasonDb.Hard
+    }
+
+private fun LazyUnitDb.toDb(): LazyUnit =
     LazyUnit(
         time = this.time,
         reason =
