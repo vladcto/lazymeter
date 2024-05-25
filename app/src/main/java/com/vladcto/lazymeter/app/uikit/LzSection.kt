@@ -16,9 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.vladcto.lazymeter.app.theme.values.unit
+import androidx.compose.ui.unit.sp
+import com.vladcto.lazymeter.core.theme.Paddings
+import com.vladcto.lazymeter.core.theme.unit
 
 @Composable
 fun LzSection(
@@ -32,7 +35,7 @@ fun LzSection(
     ) {
         Title(title = title, actions = actions)
         Box(modifier = Modifier.height(4.dp))
-        Box(modifier = Modifier.padding(4.dp)) {
+        Box(modifier = Modifier.padding(vertical = Paddings.small, horizontal = Paddings.medium)) {
             content()
         }
     }
@@ -55,9 +58,11 @@ private fun Title(
                 .padding(8.dp),
     ) {
         Row {
-            Text(title)
+            LzText.medium(title, fontSize = 20.sp, textAlign = TextAlign.Center)
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth(),
                 horizontalArrangement = Arrangement.End,
             ) {
                 actions()

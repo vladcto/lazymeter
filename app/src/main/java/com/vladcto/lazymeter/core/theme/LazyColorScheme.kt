@@ -1,4 +1,6 @@
-package com.vladcto.lazymeter.app.theme.extensions
+@file:Suppress("unused")
+
+package com.vladcto.lazymeter.core.theme
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
@@ -15,3 +17,9 @@ val ColorScheme.boringColor: Color
 
 val ColorScheme.hardColor: Color
     @Composable get() = Color(0xFFFF390F)
+
+val ColorScheme.mainBackground: Color
+    @Composable get() = softYellow
+
+val ColorScheme.linkHighlight: Color
+    @Composable get() = blue

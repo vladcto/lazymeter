@@ -1,9 +1,12 @@
 package com.vladcto.lazymeter.app.lazyoverview
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.AddCircle
@@ -12,14 +15,16 @@ import androidx.compose.material.icons.rounded.Face
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -27,21 +32,27 @@ import com.vladcto.lazymeter.app.lazyoverview.viewmodel.LazyOverviewDisplayMode
 import com.vladcto.lazymeter.app.lazyoverview.viewmodel.PreviewLazyViewModel
 import com.vladcto.lazymeter.app.lazyoverview.widgets.preview.LazyPreviewSection
 import com.vladcto.lazymeter.app.lazyoverview.widgets.stats.LazyStatsSection
-import com.vladcto.lazymeter.app.uikit.LzCircle
+import com.vladcto.lazymeter.app.uikit.LzText
+import com.vladcto.lazymeter.core.theme.Paddings
+import com.vladcto.lazymeter.core.theme.mainBackground
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable
-fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
-    val lazyOverviewState by previewLazyViewModel.overviewState.collectAsState()
-    val statsState by previewLazyViewModel.statsState.collectAsState()
+fun LazyPreviewPage(overviewLazyViewModel: PreviewLazyViewModel = viewModel()) {
+    val lazyOverviewState by overviewLazyViewModel.overviewState.collectAsState()
+    val statsState by overviewLazyViewModel.statsState.collectAsState()
     val unitsCount = statsState.untisCount
-    val displayMode by previewLazyViewModel.displayModeState.collectAsState()
+    val displayMode by overviewLazyViewModel.displayModeState.collectAsState()
 
     Scaffold(topBar = {
         TopAppBar(
+            colors =
+                TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.mainBackground,
+                ),
             title = {
                 Text(
-                    "Причины, почему не геометрические фигуры",
+                    "LazyMeter",
                     fontSize = 20.sp,
                 )
             },
@@ -49,22 +60,22 @@ fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
     }, bottomBar = {
         BottomAppBar {
             IconButton(onClick = {
-                previewLazyViewModel.addLazyUnit(LazyReason.Distracted)
+                overviewLazyViewModel.addLazyUnit(LazyReason.Distracted)
             }) {
                 Icon(Icons.Rounded.Add, contentDescription = "")
             }
             IconButton(onClick = {
-                previewLazyViewModel.addLazyUnit(LazyReason.Hard)
+                overviewLazyViewModel.addLazyUnit(LazyReason.Hard)
             }) {
                 Icon(Icons.Rounded.AddCircle, contentDescription = "")
             }
             IconButton(onClick = {
-                previewLazyViewModel.addLazyUnit(LazyReason.Tired)
+                overviewLazyViewModel.addLazyUnit(LazyReason.Tired)
             }) {
                 Icon(Icons.Rounded.Build, contentDescription = "")
             }
             IconButton(onClick = {
-                previewLazyViewModel.addLazyUnit(LazyReason.Boring)
+                overviewLazyViewModel.addLazyUnit(LazyReason.Boring)
             }) {
                 Icon(Icons.Rounded.Face, contentDescription = "")
             }
@@ -75,8 +86,10 @@ fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
                 Modifier
                     .padding(it)
                     .padding(horizontal = 4.dp)
+                    .verticalScroll(rememberScrollState())
                     .fillMaxHeight(),
         ) {
+            Spacer(modifier = Modifier.height(Paddings.large))
             LazyStatsSection(
                 todayLazy = statsState.todayCount,
                 avgDay = statsState.avgDay,
@@ -90,15 +103,19 @@ fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
                 lazyUnits = lazyOverviewState.units,
                 displayMonth = displayMode == LazyOverviewDisplayMode.Month,
                 actions = {
-                    LzCircle(
-                        color = Color.Red,
-                        modifier = Modifier.size(32.dp),
+                    val title =
+                        when (displayMode) {
+                            LazyOverviewDisplayMode.Day -> "День"
+                            LazyOverviewDisplayMode.Month -> "Месяц"
+                        }
+                    LzText.clickable(
+                        text = title,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
                         onTap = {
-                            previewLazyViewModel.changeDisplayMode()
+                            overviewLazyViewModel.changeDisplayMode()
                         },
-                    ) {
-                        Text("Change")
-                    }
+                    )
                 },
             )
         }

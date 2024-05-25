@@ -1,10 +1,17 @@
 package com.vladcto.lazymeter.app.uikit
 
+import androidx.compose.foundation.clickable
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
-import com.vladcto.lazymeter.app.theme.values.boldTextStyle
-import com.vladcto.lazymeter.app.theme.values.mediumTextStyle
+import com.vladcto.lazymeter.core.theme.boldTextStyle
+import com.vladcto.lazymeter.core.theme.linkHighlight
+import com.vladcto.lazymeter.core.theme.mediumTextStyle
 
 class LzText {
     companion object {
@@ -20,8 +27,35 @@ class LzText {
         fun medium(
             text: String,
             fontSize: TextUnit = TextUnit.Unspecified,
+            textAlign: TextAlign? = null,
         ) {
-            Text(text, style = mediumTextStyle, fontSize = fontSize)
+            Text(
+                text,
+                style = mediumTextStyle,
+                textAlign = textAlign,
+                fontSize = fontSize,
+            )
+        }
+
+        @Composable
+        fun clickable(
+            text: String,
+            onTap: () -> Unit,
+            fontSize: TextUnit = TextUnit.Unspecified,
+            textAlign: TextAlign? = null,
+        ) {
+            Text(
+                modifier = Modifier.clickable(onClick = { onTap() }),
+                text = text,
+                textAlign = textAlign,
+                fontSize = fontSize,
+                color = MaterialTheme.colorScheme.linkHighlight,
+                fontWeight = FontWeight.SemiBold,
+                style =
+                    mediumTextStyle.copy(
+                        textDecoration = TextDecoration.Underline,
+                    ),
+            )
         }
     }
 }

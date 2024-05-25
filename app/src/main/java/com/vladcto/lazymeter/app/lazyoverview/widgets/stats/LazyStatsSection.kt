@@ -19,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vladcto.lazymeter.app.theme.values.LazymeterTheme
-import com.vladcto.lazymeter.app.theme.values.unit
 import com.vladcto.lazymeter.app.uikit.LzCircle
 import com.vladcto.lazymeter.app.uikit.LzLazyReasonCircle
 import com.vladcto.lazymeter.app.uikit.LzSection
 import com.vladcto.lazymeter.app.uikit.LzText
+import com.vladcto.lazymeter.core.theme.LazymeterTheme
+import com.vladcto.lazymeter.core.theme.unit
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable
@@ -147,7 +147,7 @@ private fun DayPreview(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        LzCircle {
+        LzCircle(borderSize = 1.unit) {
             LzText.bold(text = todayLazy.toString(), fontSize = 28.sp)
         }
     }

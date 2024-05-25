@@ -1,13 +1,12 @@
 package com.vladcto.lazymeter.app.lazyoverview.widgets.preview
 
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.vladcto.lazymeter.app.theme.values.unit
 import com.vladcto.lazymeter.app.uikit.LzGroup
 import com.vladcto.lazymeter.app.uikit.LzLazyUnitsFlowRow
+import com.vladcto.lazymeter.core.theme.unit
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
 import java.time.LocalDateTime
@@ -20,20 +19,22 @@ fun MonthLazyGroups(
     val sortedUnits = units.sortedBy { it.time }
     val unitGroups = sortedUnits.groupBy { it.time.month }
 
-    LazyColumn(modifier = modifier) {
-        items(unitGroups.keys.toList()) { key ->
-            val groupedUnits = unitGroups[key]
-
-            LzGroup(title = key.name) {
+    Column(modifier = modifier) {
+        unitGroups.keys.map { date ->
+            val groupedUnits = unitGroups[date]
+            LzGroup(title = date.name) {
                 LzLazyUnitsFlowRow(
                     units = groupedUnits,
                     circleTitleSolver = { "${it.time.dayOfMonth}" },
                     circleSize = 4.unit,
+                    circleBorderSize = 0.2.unit,
                 )
             }
         }
     }
 }
+
+// PREVIEW
 
 @Preview(widthDp = 150)
 @Composable

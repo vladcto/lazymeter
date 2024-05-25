@@ -4,16 +4,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.vladcto.lazymeter.app.theme.extensions.boringColor
-import com.vladcto.lazymeter.app.theme.extensions.distractedColor
-import com.vladcto.lazymeter.app.theme.extensions.hardColor
-import com.vladcto.lazymeter.app.theme.extensions.tiredColor
+import androidx.compose.ui.unit.Dp
+import com.vladcto.lazymeter.core.theme.boringColor
+import com.vladcto.lazymeter.core.theme.distractedColor
+import com.vladcto.lazymeter.core.theme.hardColor
+import com.vladcto.lazymeter.core.theme.tiredColor
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable
 fun LzLazyReasonCircle(
     modifier: Modifier = Modifier,
     reason: LazyReason,
+    borderSize: Dp? = null,
     content: (@Composable () -> Unit)? = null,
 ) {
     val colorScheme = MaterialTheme.colorScheme
@@ -27,6 +29,7 @@ fun LzLazyReasonCircle(
     LzCircle(
         modifier = modifier,
         color = color,
+        borderSize = borderSize,
     ) {
         content?.invoke()
     }

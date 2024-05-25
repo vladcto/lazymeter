@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,11 +16,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
+import com.vladcto.lazymeter.core.theme.unit
 import kotlin.math.min
+
+private val BLACK_BORDER_SIZE = 0.1.unit
+private val DEFAULT_BORDER_SIZE = 0.5.unit
 
 @Composable
 fun LzCircle(
     modifier: Modifier = Modifier,
+    borderSize: Dp? = null,
     color: Color? = null,
     onTap: (() -> Unit)? = null,
     content: @Composable () -> Unit,
@@ -32,10 +39,16 @@ fun LzCircle(
             modifier =
                 Modifier
                     .fillMaxSize()
+                    .background(Color.Black, shape = CircleShape)
+                    .padding(BLACK_BORDER_SIZE)
                     .background(
                         color ?: MaterialTheme.colorScheme.primary,
                         shape = CircleShape,
-                    ),
+                    )
+                    .padding(borderSize ?: DEFAULT_BORDER_SIZE)
+                    .background(Color.Black, shape = CircleShape)
+                    .padding(BLACK_BORDER_SIZE)
+                    .background(Color.White, shape = CircleShape),
             contentAlignment = Alignment.Center,
         ) {
             content()

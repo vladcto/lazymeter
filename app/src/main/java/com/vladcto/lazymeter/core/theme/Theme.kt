@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.theme.values
+package com.vladcto.lazymeter.core.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
@@ -9,7 +9,7 @@ private val LightColorScheme =
     lightColorScheme(
         primary = primaryColor,
         secondary = secondaryColor,
-        tertiary = teritaryColor,
+        tertiary = tertiaryColor,
         /* Other default colors to override
         background = Color(0xFFFFFBFE),
         surface = Color(0xFFFFFBFE),

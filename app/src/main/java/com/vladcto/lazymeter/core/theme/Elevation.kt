@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.app.theme.values
+package com.vladcto.lazymeter.core.theme
 
 import androidx.compose.ui.unit.dp
 
