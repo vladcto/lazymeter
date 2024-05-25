@@ -5,10 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import com.vladcto.lazymeter.core.theme.boringColor
-import com.vladcto.lazymeter.core.theme.distractedColor
-import com.vladcto.lazymeter.core.theme.hardColor
-import com.vladcto.lazymeter.core.theme.tiredColor
+import com.vladcto.lazymeter.app.uikit.theme.boringColor
+import com.vladcto.lazymeter.app.uikit.theme.distractedColor
+import com.vladcto.lazymeter.app.uikit.theme.hardColor
+import com.vladcto.lazymeter.app.uikit.theme.tiredColor
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable

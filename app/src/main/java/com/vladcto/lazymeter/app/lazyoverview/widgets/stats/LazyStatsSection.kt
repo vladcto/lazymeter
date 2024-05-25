@@ -24,9 +24,9 @@ import com.vladcto.lazymeter.app.uikit.LzCircle
 import com.vladcto.lazymeter.app.uikit.LzLazyReasonCircle
 import com.vladcto.lazymeter.app.uikit.LzSection
 import com.vladcto.lazymeter.app.uikit.LzText
-import com.vladcto.lazymeter.core.theme.LazymeterTheme
-import com.vladcto.lazymeter.core.theme.Paddings
-import com.vladcto.lazymeter.core.theme.unit
+import com.vladcto.lazymeter.app.uikit.theme.LazymeterTheme
+import com.vladcto.lazymeter.app.uikit.theme.Paddings
+import com.vladcto.lazymeter.app.uikit.theme.unit
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable

@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
-import com.vladcto.lazymeter.core.theme.unit
+import com.vladcto.lazymeter.app.uikit.theme.unit
 import kotlin.math.min
 
 private val BLACK_BORDER_SIZE = 0.1.unit

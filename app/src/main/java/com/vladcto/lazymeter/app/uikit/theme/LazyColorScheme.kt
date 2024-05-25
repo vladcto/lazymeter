@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.vladcto.lazymeter.core.theme
+package com.vladcto.lazymeter.app.uikit.theme
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable

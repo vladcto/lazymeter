@@ -38,13 +38,13 @@ import com.vladcto.lazymeter.app.lazyoverview.viewmodel.PreviewLazyViewModel
 import com.vladcto.lazymeter.app.lazyoverview.widgets.preview.LazyPreviewSection
 import com.vladcto.lazymeter.app.lazyoverview.widgets.stats.LazyStatsSection
 import com.vladcto.lazymeter.app.uikit.LzText
-import com.vladcto.lazymeter.core.theme.Paddings
-import com.vladcto.lazymeter.core.theme.boringColor
-import com.vladcto.lazymeter.core.theme.distractedColor
-import com.vladcto.lazymeter.core.theme.hardColor
-import com.vladcto.lazymeter.core.theme.mainBackground
-import com.vladcto.lazymeter.core.theme.tiredColor
-import com.vladcto.lazymeter.core.theme.unit
+import com.vladcto.lazymeter.app.uikit.theme.Paddings
+import com.vladcto.lazymeter.app.uikit.theme.boringColor
+import com.vladcto.lazymeter.app.uikit.theme.distractedColor
+import com.vladcto.lazymeter.app.uikit.theme.hardColor
+import com.vladcto.lazymeter.app.uikit.theme.mainBackground
+import com.vladcto.lazymeter.app.uikit.theme.tiredColor
+import com.vladcto.lazymeter.app.uikit.theme.unit
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable

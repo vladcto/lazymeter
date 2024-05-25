@@ -9,10 +9,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
-import com.vladcto.lazymeter.core.theme.boldTextStyle
-import com.vladcto.lazymeter.core.theme.lightTextStyle
-import com.vladcto.lazymeter.core.theme.linkHighlight
-import com.vladcto.lazymeter.core.theme.mediumTextStyle
+import com.vladcto.lazymeter.app.uikit.theme.boldTextStyle
+import com.vladcto.lazymeter.app.uikit.theme.lightTextStyle
+import com.vladcto.lazymeter.app.uikit.theme.linkHighlight
+import com.vladcto.lazymeter.app.uikit.theme.mediumTextStyle
 
 class LzText {
     companion object {

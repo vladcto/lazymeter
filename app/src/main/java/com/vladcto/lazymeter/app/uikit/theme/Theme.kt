@@ -1,4 +1,4 @@
-package com.vladcto.lazymeter.core.theme
+package com.vladcto.lazymeter.app.uikit.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
