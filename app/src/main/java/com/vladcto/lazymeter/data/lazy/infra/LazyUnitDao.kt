@@ -32,17 +32,8 @@ interface LazyUnitDao {
             "AND :startTime <= time " +
             "AND time < :endTime",
     )
-    suspend fun getReasonCountInRange(
+    suspend fun getCountInRange(
         reason: LazyReasonDb,
-        startTime: LocalDateTime,
-        endTime: LocalDateTime,
-    ): Int
-
-    @Query(
-        "SELECT COUNT(*) FROM LAZYUNIT " +
-            "WHERE :startTime <= time AND time < :endTime",
-    )
-    suspend fun getReasonCountInRange(
         startTime: LocalDateTime,
         endTime: LocalDateTime,
     ): Int

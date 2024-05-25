@@ -32,7 +32,7 @@ class LazyUnitRepository
         suspend fun getCountInDay(date: LocalDate): Int {
             val startTime = date.atStartOfDay()
             val endTime = startTime.plusHours(24)
-            return _lazyUnitDao.getReasonCountInRange(
+            return _lazyUnitDao.getCountInRange(
                 startTime = startTime,
                 endTime = endTime,
             )
@@ -44,7 +44,7 @@ class LazyUnitRepository
         ): Int {
             val startTime = date.atStartOfDay()
             val endTime = startTime.plusHours(24)
-            return _lazyUnitDao.getReasonCountInRange(
+            return _lazyUnitDao.getCountInRange(
                 reason = reason.toDb(),
                 startTime = startTime,
                 endTime = endTime,
@@ -54,7 +54,7 @@ class LazyUnitRepository
         suspend fun avgDayCount(date: LocalDate): Float {
             val startTime = date.atStartOfDay()
             val endTime = startTime.plusHours(24)
-            val count = _lazyUnitDao.getReasonCountInRange(startTime, endTime)
+            val count = _lazyUnitDao.getCountInRange(startTime, endTime)
             return count / (Duration.between(startTime, endTime).toDays().toFloat())
         }
     }

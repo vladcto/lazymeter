@@ -51,9 +51,6 @@ class PreviewLazyViewModel
             viewModelScope.launch {
                 _lazyUnitRepository.add(unit)
                 updateState()
-                _overviewState.update { currentState ->
-                    LazyOverviewPreviewState(currentState.units + unit)
-                }
             }
         }
 
