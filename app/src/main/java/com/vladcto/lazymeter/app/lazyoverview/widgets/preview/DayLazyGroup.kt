@@ -16,7 +16,7 @@ fun DayLazyGroup(
     modifier: Modifier = Modifier,
     units: List<LazyUnit>,
 ) {
-    val sortedUnits = units.sortedBy { it.time }
+    val sortedUnits = units.sortedByDescending { it.time }
     val unitGroups =
         sortedUnits.groupBy {
             it.time.toLocalDate()

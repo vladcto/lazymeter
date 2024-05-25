@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,6 +25,7 @@ import com.vladcto.lazymeter.app.uikit.LzLazyReasonCircle
 import com.vladcto.lazymeter.app.uikit.LzSection
 import com.vladcto.lazymeter.app.uikit.LzText
 import com.vladcto.lazymeter.core.theme.LazymeterTheme
+import com.vladcto.lazymeter.core.theme.Paddings
 import com.vladcto.lazymeter.core.theme.unit
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
@@ -46,7 +48,7 @@ fun LazyStatsSection(
         Row(
             modifier =
                 Modifier
-                    .height(150.dp)
+                    .height(20.unit)
                     .fillMaxWidth(),
         ) {
             spacer()
@@ -163,14 +165,25 @@ private fun StatPreview(
         modifier = modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceEvenly,
     ) {
+        LzText.light(
+            modifier = Modifier.fillMaxWidth(),
+            text = "ср в день",
+            textAlign = TextAlign.Center,
+        )
+        Box(modifier = Modifier.height(Paddings.small))
         LzCircle(modifier = Modifier.weight(1f)) {
-            Text(avgDay.toString())
+            Text(avgDay.toInt().toString())
         }
-        Box(modifier = Modifier.height(8.dp))
+        Box(modifier = Modifier.height(Paddings.medium))
+        LzText.light(
+            modifier = Modifier.fillMaxWidth(),
+            text = "ср в неделю",
+            textAlign = TextAlign.Center,
+        )
+        Box(modifier = Modifier.height(Paddings.small))
         LzCircle(modifier = Modifier.weight(1f)) {
-            Text(avgWeek.toString())
+            Text(avgWeek.toInt().toString())
         }
-        Box(modifier = Modifier.height(4.dp))
     }
 }
 

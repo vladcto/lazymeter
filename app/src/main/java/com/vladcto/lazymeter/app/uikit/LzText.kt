@@ -10,6 +10,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import com.vladcto.lazymeter.core.theme.boldTextStyle
+import com.vladcto.lazymeter.core.theme.lightTextStyle
 import com.vladcto.lazymeter.core.theme.linkHighlight
 import com.vladcto.lazymeter.core.theme.mediumTextStyle
 
@@ -32,6 +33,22 @@ class LzText {
             Text(
                 text,
                 style = mediumTextStyle,
+                textAlign = textAlign,
+                fontSize = fontSize,
+            )
+        }
+
+        @Composable
+        fun light(
+            modifier: Modifier = Modifier,
+            text: String,
+            fontSize: TextUnit = TextUnit.Unspecified,
+            textAlign: TextAlign? = null,
+        ) {
+            Text(
+                modifier = modifier,
+                text = text,
+                style = lightTextStyle,
                 textAlign = textAlign,
                 fontSize = fontSize,
             )

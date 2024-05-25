@@ -52,8 +52,8 @@ class LazyUnitRepository
         }
 
         suspend fun avgDayCount(date: LocalDate): Float {
-            val startTime = date.atStartOfDay()
-            val endTime = startTime.plusHours(24)
+            val startTime = date.atStartOfDay().minusDays(6)
+            val endTime = date.atStartOfDay().plusDays(1)
             val count = _lazyUnitDao.getCountInRange(startTime, endTime)
             return count / (Duration.between(startTime, endTime).toDays().toFloat())
         }
