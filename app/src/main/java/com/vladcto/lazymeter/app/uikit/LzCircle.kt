@@ -1,6 +1,7 @@
 package com.vladcto.lazymeter.app.uikit
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CircleShape
@@ -9,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +21,7 @@ import kotlin.math.min
 fun LzCircle(
     modifier: Modifier = Modifier,
     color: Color? = null,
+    onTap: (() -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
     return Box(
@@ -36,6 +39,18 @@ fun LzCircle(
             contentAlignment = Alignment.Center,
         ) {
             content()
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .clip(
+                            shape = CircleShape,
+                        )
+                        .clickable(
+                            enabled = onTap != null,
+                            onClick = { onTap?.invoke() },
+                        ),
+            )
         }
     }
 }

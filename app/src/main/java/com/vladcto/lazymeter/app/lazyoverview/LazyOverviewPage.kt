@@ -3,6 +3,7 @@ package com.vladcto.lazymeter.app.lazyoverview
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.AddCircle
@@ -18,17 +19,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.vladcto.lazymeter.app.lazyoverview.viewmodel.LazyOverviewDisplayMode
 import com.vladcto.lazymeter.app.lazyoverview.viewmodel.PreviewLazyViewModel
 import com.vladcto.lazymeter.app.lazyoverview.widgets.preview.LazyPreviewSection
 import com.vladcto.lazymeter.app.lazyoverview.widgets.stats.LazyStatsSection
+import com.vladcto.lazymeter.app.uikit.LzCircle
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable
 fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
-    val lazyPreviewState by previewLazyViewModel.previewState.collectAsState()
+    val lazyOverviewState by previewLazyViewModel.overviewState.collectAsState()
+    val statsState by previewLazyViewModel.statsState.collectAsState()
+    val unitsCount = statsState.untisCount
+    val displayMode by previewLazyViewModel.displayModeState.collectAsState()
+
     Scaffold(topBar = {
         TopAppBar(
             title = {
@@ -69,8 +77,30 @@ fun LazyPreviewPage(previewLazyViewModel: PreviewLazyViewModel = viewModel()) {
                     .padding(horizontal = 4.dp)
                     .fillMaxHeight(),
         ) {
-            LazyStatsSection()
-            LazyPreviewSection(lazyUnits = lazyPreviewState.lazyUnits)
+            LazyStatsSection(
+                todayLazy = statsState.todayCount,
+                avgDay = statsState.avgDay,
+                avgWeek = statsState.avgWeek,
+                boringCount = unitsCount.boring,
+                tiredCount = unitsCount.tired,
+                distractedCount = unitsCount.distracted,
+                hardCount = unitsCount.hard,
+            )
+            LazyPreviewSection(
+                lazyUnits = lazyOverviewState.units,
+                displayMonth = displayMode == LazyOverviewDisplayMode.Month,
+                actions = {
+                    LzCircle(
+                        color = Color.Red,
+                        modifier = Modifier.size(32.dp),
+                        onTap = {
+                            previewLazyViewModel.changeDisplayMode()
+                        },
+                    ) {
+                        Text("Change")
+                    }
+                },
+            )
         }
     }
 }

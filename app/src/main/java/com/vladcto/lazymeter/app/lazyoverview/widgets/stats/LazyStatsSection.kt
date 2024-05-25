@@ -26,7 +26,16 @@ import com.vladcto.lazymeter.app.uikit.LzSection
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable
-fun LazyStatsSection(modifier: Modifier = Modifier) {
+fun LazyStatsSection(
+    modifier: Modifier = Modifier,
+    todayLazy: Int,
+    avgDay: Float,
+    avgWeek: Float,
+    tiredCount: Int,
+    distractedCount: Int,
+    boringCount: Int,
+    hardCount: Int,
+) {
     val spacer = @Composable { Spacer(modifier = Modifier.width(4.dp)) }
     return LzSection(
         modifier = modifier,
@@ -41,7 +50,14 @@ fun LazyStatsSection(modifier: Modifier = Modifier) {
             spacer()
             UnitsPreview(
                 modifier = Modifier.weight(3f),
-                unitResolver = { 4f },
+                unitResolver = {
+                    when (it) {
+                        LazyReason.Tired -> tiredCount
+                        LazyReason.Distracted -> distractedCount
+                        LazyReason.Boring -> boringCount
+                        LazyReason.Hard -> hardCount
+                    }
+                },
             )
             spacer()
             DayPreview(
@@ -53,7 +69,7 @@ fun LazyStatsSection(modifier: Modifier = Modifier) {
                             end = 4.dp,
                             bottom = 8.dp,
                         ),
-                todayLazy = 0f,
+                todayLazy = todayLazy,
                 grade = 10f,
             )
             spacer()
@@ -62,8 +78,8 @@ fun LazyStatsSection(modifier: Modifier = Modifier) {
                     Modifier
                         .weight(3f)
                         .padding(vertical = 4.dp),
-                avgDay = 0f,
-                avgWeek = 0f,
+                avgDay = avgDay,
+                avgWeek = avgWeek,
             )
             spacer()
         }
@@ -73,7 +89,7 @@ fun LazyStatsSection(modifier: Modifier = Modifier) {
 @Composable
 private fun UnitsPreview(
     modifier: Modifier = Modifier,
-    unitResolver: (LazyReason) -> Float,
+    unitResolver: (LazyReason) -> Int,
 ) {
     val paddingOffset = 22.dp
 
@@ -108,7 +124,7 @@ private fun UnitsPreview(
 @Composable
 fun ColumnScope.UnitCircle(
     reason: LazyReason,
-    value: Float,
+    value: Int,
 ) {
     LzLazyReasonCircle(
         modifier = Modifier.weight(1f),
@@ -121,7 +137,7 @@ fun ColumnScope.UnitCircle(
 @Composable
 private fun DayPreview(
     modifier: Modifier = Modifier,
-    todayLazy: Float,
+    todayLazy: Int,
     grade: Float,
 ) {
     return Box(
@@ -170,5 +186,13 @@ private fun StatPreview(
 @Preview(widthDp = 275, heightDp = 175)
 @Composable
 private fun LazyStatsSectionPreview() {
-    LazyStatsSection()
+    LazyStatsSection(
+        todayLazy = 2,
+        avgDay = 2.45f,
+        avgWeek = 12.45f,
+        boringCount = 12,
+        distractedCount = 9,
+        hardCount = 0,
+        tiredCount = 56,
+    )
 }

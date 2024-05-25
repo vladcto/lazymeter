@@ -15,6 +15,11 @@ data class LazyOverviewUnitCount(
     val hard: Int,
 )
 
+enum class LazyOverviewDisplayMode {
+    Day,
+    Month,
+}
+
 data class LazyOverviewStatsState(
     val untisCount: LazyOverviewUnitCount,
     val todayCount: Int,

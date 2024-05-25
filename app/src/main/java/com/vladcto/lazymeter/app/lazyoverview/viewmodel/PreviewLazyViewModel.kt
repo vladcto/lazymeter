@@ -38,9 +38,11 @@ class PreviewLazyViewModel
                     todayDiffToMonth = 0,
                 ),
             )
+        private val _displayModeState = MutableStateFlow(LazyOverviewDisplayMode.Day)
 
         val overviewState = _overviewState.asStateFlow()
         val statsState = _statsState.asStateFlow()
+        val displayModeState = _displayModeState.asStateFlow()
 
         init {
             viewModelScope.launch { updateState() }
@@ -52,6 +54,15 @@ class PreviewLazyViewModel
                 _lazyUnitRepository.add(unit)
                 updateState()
             }
+        }
+
+        fun changeDisplayMode() {
+            val value =
+                when (displayModeState.value) {
+                    LazyOverviewDisplayMode.Month -> LazyOverviewDisplayMode.Day
+                    LazyOverviewDisplayMode.Day -> LazyOverviewDisplayMode.Month
+                }
+            _displayModeState.update { _ -> value }
         }
 
         private suspend fun updateState() {

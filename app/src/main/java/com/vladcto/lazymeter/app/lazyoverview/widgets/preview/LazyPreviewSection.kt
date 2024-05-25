@@ -1,5 +1,6 @@
 package com.vladcto.lazymeter.app.lazyoverview.widgets.preview
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,14 +12,14 @@ import com.vladcto.lazymeter.data.lazy.domain.LazyUnit
 fun LazyPreviewSection(
     modifier: Modifier = Modifier,
     lazyUnits: List<LazyUnit>,
+    actions: @Composable RowScope.() -> Unit = {},
+    displayMonth: Boolean,
 ) {
-    val choosen = true
-
     LzSection(
         title = "Просмотр",
-        actions = {},
+        actions = actions,
     ) {
-        if (choosen) {
+        if (displayMonth) {
             MonthLazyGroups(
                 modifier = modifier.fillMaxSize(),
                 units = lazyUnits,
@@ -35,5 +36,9 @@ fun LazyPreviewSection(
 @Preview(widthDp = 250, heightDp = 150)
 @Composable
 private fun LazyPreviewSectionPreview() {
-    LazyPreviewSection(lazyUnits = listOf())
+    LazyPreviewSection(
+        lazyUnits = listOf(),
+        actions = {},
+        displayMonth = false,
+    )
 }
