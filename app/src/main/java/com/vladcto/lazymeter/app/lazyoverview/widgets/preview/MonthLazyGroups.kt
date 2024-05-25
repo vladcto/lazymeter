@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.vladcto.lazymeter.app.theme.values.unit
 import com.vladcto.lazymeter.app.uikit.LzGroup
 import com.vladcto.lazymeter.app.uikit.LzLazyUnitsFlowRow
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
@@ -27,6 +28,7 @@ fun MonthLazyGroups(
                 LzLazyUnitsFlowRow(
                     units = groupedUnits,
                     circleTitleSolver = { "${it.time.dayOfMonth}" },
+                    circleSize = 4.unit,
                 )
             }
         }

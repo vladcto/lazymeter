@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.vladcto.lazymeter.app.theme.values.unit
 
 @Composable
 fun LzSection(
@@ -42,15 +43,15 @@ private fun Title(
     title: String,
     actions: @Composable RowScope.() -> Unit,
 ) {
-    val theme = MaterialTheme.colorScheme
-    val shape = CutCornerShape(2.dp)
+    val colorScheme = MaterialTheme.colorScheme
+    val shape = RoundedCornerShape(1.unit)
 
     return Box(
         modifier =
             Modifier
                 .fillMaxWidth()
                 .clip(shape)
-                .background(theme.primary)
+                .background(colorScheme.tertiary)
                 .padding(8.dp),
     ) {
         Row {

@@ -10,19 +10,21 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.vladcto.lazymeter.app.theme.values.LazymeterTheme
+import com.vladcto.lazymeter.app.theme.values.unit
 import com.vladcto.lazymeter.app.uikit.LzCircle
 import com.vladcto.lazymeter.app.uikit.LzLazyReasonCircle
 import com.vladcto.lazymeter.app.uikit.LzSection
+import com.vladcto.lazymeter.app.uikit.LzText
 import com.vladcto.lazymeter.data.lazy.domain.LazyReason
 
 @Composable
@@ -70,7 +72,6 @@ fun LazyStatsSection(
                             bottom = 8.dp,
                         ),
                 todayLazy = todayLazy,
-                grade = 10f,
             )
             spacer()
             StatPreview(
@@ -127,10 +128,13 @@ fun ColumnScope.UnitCircle(
     value: Int,
 ) {
     LzLazyReasonCircle(
-        modifier = Modifier.weight(1f),
+        modifier =
+            Modifier
+                .weight(1f)
+                .padding(0.5.unit),
         reason = reason,
     ) {
-        Text(text = value.toString())
+        LzText.medium(text = value.toString())
     }
 }
 
@@ -138,24 +142,13 @@ fun ColumnScope.UnitCircle(
 private fun DayPreview(
     modifier: Modifier = Modifier,
     todayLazy: Int,
-    grade: Float,
 ) {
     return Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
         LzCircle {
-            Text(text = todayLazy.toString())
-            LzCircle(
-                modifier =
-                    Modifier
-                        .align(Alignment.BottomEnd)
-                        .offset(0.dp, 8.dp)
-                        .fillMaxSize(0.4f),
-                color = Color.White,
-            ) {
-                Text(text = grade.toString())
-            }
+            LzText.bold(text = todayLazy.toString(), fontSize = 28.sp)
         }
     }
 }
@@ -186,13 +179,15 @@ private fun StatPreview(
 @Preview(widthDp = 275, heightDp = 175)
 @Composable
 private fun LazyStatsSectionPreview() {
-    LazyStatsSection(
-        todayLazy = 2,
-        avgDay = 2.45f,
-        avgWeek = 12.45f,
-        boringCount = 12,
-        distractedCount = 9,
-        hardCount = 0,
-        tiredCount = 56,
-    )
+    LazymeterTheme {
+        LazyStatsSection(
+            todayLazy = 102,
+            avgDay = 2.45f,
+            avgWeek = 12.45f,
+            boringCount = 12,
+            distractedCount = 9,
+            hardCount = 0,
+            tiredCount = 56,
+        )
+    }
 }
